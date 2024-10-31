@@ -2,26 +2,24 @@ package lab24;
 import java.util.Scanner;
 
 public class QuickSort {
-    static int partition(int[] arr, int low, int high) {
-        int pivot = arr[high];
+    static int partition(String[] arr, int low, int high) {
+        String pivot = arr[high];
         int i = low - 1;
-        
         for (int j = low; j < high; j++) {
-            if (arr[j] < pivot) {
+            if (arr[j].compareTo(pivot) < 0) {
                 i++;
-                int temp = arr[i];
+                String temp = arr[i];
                 arr[i] = arr[j];
                 arr[j] = temp;
             }
         }
-        int temp = arr[i + 1];
+        String temp = arr[i + 1];
         arr[i + 1] = arr[high];
         arr[high] = temp;
-        
         return i + 1;
     }
 
-    static void quickSort(int[] arr, int low, int high) {
+    static void quickSort(String[] arr, int low, int high) {
         if (low < high) {
             int pi = partition(arr, low, high);
             quickSort(arr, low, pi - 1);
@@ -31,19 +29,18 @@ public class QuickSort {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int[] arr = new int[50];
-        System.out.println("Enter the number of elements:");
+        System.out.print("Enter the number of names: ");
         int n = sc.nextInt();
-        System.out.println("Enter the elements:");
+        sc.nextLine();
+        String[] arr = new String[n];
         for (int i = 0; i < n; i++) {
-            arr[i] = sc.nextInt();
+            System.out.print("Enter the name of person " + (i + 1) + ": ");
+            arr[i] = sc.nextLine();
         }
-        
-        quickSort(arr, 0, n - 1);
-        
-        System.out.println("Sorted array:");
-        for (int i = 0; i < n; i++) {
-            System.out.print(arr[i] + " ");
+        quickSort(arr, 0, arr.length - 1);
+        System.out.println("\nThe list of names after sorting is:");
+        for (String name : arr) {
+            System.out.println(name);
         }
     }
 }
